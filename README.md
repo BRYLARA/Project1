@@ -84,24 +84,29 @@ Speakers= David, Drissa, Caitlin, Bryan
 
 
 HTML
+
 ---David
 Pages?
   Index.html
 
 CSS
+
 Research framework (not Bootstrap)
 
 
 Javascript
+
  Pages?
- -API
- -Logic flow
+ -API--Drissa
+ -Logic flow--Caitlin
 
 API
+
 MAKE SURE THEY WORK!
 
 
 General logic/Javasvript
+
 2 main people then add others to finish?---BIG TEAM
 
 
