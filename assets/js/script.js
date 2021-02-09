@@ -54,3 +54,19 @@ var getLocation = function(latitude,longitude){
 //  2-get user latidude and longitude
 //  3-compare all park locations to the user's and display the closest  
 };
+
+
+
+// MAP API /Caitlin below
+
+var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow',
+    mode: "no-cors",
+  };
+  
+  fetch("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=national park&inputtype=textquery&fields=photos,formatted_address,name,rating&locationbias=circle:2000@47.6918452,-122.2226413&key=AIzaSyA_hZqWHClBzWa05VtjZvkHB33MK09sDb4", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
