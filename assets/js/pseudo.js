@@ -1,5 +1,5 @@
 // Global var 
-
+ //storedPlaces=[] 
 
 // What we want to happen:
   //Search maps  (parameters: miles from input location, name of park)
@@ -9,4 +9,5 @@
 
 
 // Functions
+ 
   //checklocalStorage at the beginning every time   
