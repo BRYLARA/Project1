@@ -1,11 +1,70 @@
-body{
-    background-color: aqua;
+/* MAIN BODY STYLING */
+html{
+    background-color: #f6f6f6 !important;
 }
-h1{
-    font-size: 200px;
+/* THINGS THAT DONT CHANGE */
+.main-title{
+    padding-top: 50px;
+    background-color: #f6f6f6;
+    text-align: center;
+}
+/* Is is the Main Hero Text */
+.is-1{
+    font-family: 'Vast Shadow', cursive;
+    color: #264041 !important;
+    -webkit-text-stroke-width: .25px ;
+    -webkit-text-stroke-color:#b8c9d3 ;
 }
 
-img{
-    width: 200px;
+/* NAV BAR */
+.hero.is-primary{
+    background-color:#252831 ;
+}
+.hero.is-primary a.navbar-item.is-active{
+    background-color: #05386b;
+    color: #252831;
+}
+.hero.is-primary a.navbar-item:hover{
+    background-color:#edf5e1 ;
+    color: #252831 !important;
+
+}
+/* HERO BLOCK */
+.hero-img{
+    background-image: url("../images/zion.jpeg");
+    width: 100%;
     height: auto;
+    background-size: cover;
+    text-align: center;
+}
+
+.input.is-rounded{
+    width: 40%;
+    background-color: #f6f6f6;
+}
+.button{
+    background-color: #4a4a4a;
+    color: #f6f6f6;
+}
+.button:hover{
+ background-color:#264041;
+ color: #f6f6f6;
+}
+
+.columns{
+    margin: 20px;
+}
+
+/* RANDOM PARK GENERATOR */
+.random-park-img{
+    background-color: #264041;
+    text-align: right;
+}
+p.random-park-title{
+    color: #f6f6f6 !important;
+}
+
+footer{
+    background-color: #4a4a4a !important;
+    padding: 1rem !important;
 }
