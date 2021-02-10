@@ -3,6 +3,8 @@ var currentState = ''
 // GETTING ALL PARKS USING STATE CODE  
 
 
+
+
 var getApi = function(){
     let stateCode = $('#state-input').val();
     console.log(stateCode);
@@ -15,7 +17,7 @@ var getApi = function(){
     console.log(data);
     for (let i=0; i< data.data.length; i++){
 
-        var parkEl =document.getElementById("showPark");
+        var parkEl =document.getElementById("show-park");
         // var directionEl =document.getElementById("showPark");
         // var basicInfoskEl =document.getElementById("showParkBasicInfos");
         // var activitiesEl =document.getElementById("showParkDirection");
@@ -49,24 +51,40 @@ $('#submit-button').on("click", (event) => {
 });
 
 
-var getLocation = function(latitude,longitude){
-//  1-get google api 
-//  2-get user latidude and longitude
-//  3-compare all park locations to the user's and display the closest  
-};
+
+
+
+
+
 
 
 
 // MAP API /Caitlin below
 
-var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow',
-    mode: "no-cors",
-  };
-  
-  fetch("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=national park&inputtype=textquery&fields=photos,formatted_address,name,rating&locationbias=circle:2000@47.6918452,-122.2226413&key=AIzaSyA_hZqWHClBzWa05VtjZvkHB33MK09sDb4", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+var goButton = document.getElementById("submit-button"),
+
+requestOptions = {
+  method: "POST",
+  redirect: "follow",
+  mode: "no-cors",
+};
+
+fetch(
+  "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=national park&inputtype=textquery&fields=formatted_address,name,rating&locationbias=circle:2000@47.6918452,-122.2226413&key=AIzaSyD1vmdNp2nQIkRFAzPqTGnMtDYLRRVBoqc",
+  requestOptions
+)
+  .then((response) => response.text())
+  .then((dataStr) => {
+    let data = JSON.parse(dataStr);
+    console.log(data.candidates[0].name);
+    var parkName= data.candidates[0].name;
+    document.getElementById("official-name").textContent= parkName
+  })
+  .catch((error) => console.log("error", error));
+
+
+//   var listParks = document.getElementById("show-park");
+//   let namesEl = document.createElement("p");
+//   namesEl.textContent = data.candidates[0].name;
+//   listParks.appendChild(namesEl);
+;
