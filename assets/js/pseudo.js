@@ -11,3 +11,6 @@
 // Functions
  
   //checklocalStorage at the beginning every time   
+
+
+
