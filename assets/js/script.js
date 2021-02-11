@@ -138,7 +138,7 @@ fetch("https://developer.nps.gov/api/v1/parks?api_key=vGDXf8DoFmcbZXhc3BjABck16B
 
 // Caitlin and Drissa 
 requestOptions = {
-  method: "POST",
+  method: "GET",
   redirect: "follow",
 };
 fetch(
