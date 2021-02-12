@@ -1,119 +1,70 @@
 var api_key = "vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E";
-var currentState = "";
-// GETTING ALL PARKS USING STATE CODE
+// var currentState = "";
+// // GETTING ALL PARKS USING STATE CODE
 
-var getApi = function () {
-  let stateCode = $("#state-input").val();
-  console.log(stateCode);
-  let requestUrl =
-    "https://developer.nps.gov/api/v1/parks?stateCode=" +
-    stateCode +
-    "&api_key=" +
-    api_key;
-  fetch(requestUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      for (let i = 0; i < data.data.length; i++) {
-        var parkEl = document.getElementById("show-park");
-        // var directionEl =document.getElementById("showPark");
-        // var basicInfoskEl =document.getElementById("showParkBasicInfos");
-        // var activitiesEl =document.getElementById("showParkDirection");
+// var getApi = function () {
+//   let stateCode = $("#state-input").val();
+//   console.log(stateCode);
+//   let requestUrl =
+//     "https://developer.nps.gov/api/v1/parks?stateCode=" +
+//     stateCode +
+//     "&api_key=" +
+//     api_key;
+//   fetch(requestUrl)
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//       for (let i = 0; i < data.data.length; i++) {
+//         // var parkEl = document.getElementById("show-park");
+//         // var directionEl =document.getElementById("showPark");
+//         // var basicInfoskEl =document.getElementById("showParkBasicInfos");
+//         // var activitiesEl =document.getElementById("showParkDirection");
 
-        let p1El = document.createElement("p");
-        // let p2El = document.createElement("p");
-        // let p3El = document.createElement("p");
+//         let p1El = document.createElement("p");
+//         // let p2El = document.createElement("p");
+//         // let p3El = document.createElement("p");
 
-        p1El.textContent = data.data[i].fullName;
-        // p2El.textContent =  data.data[i].description;
-        // p3El.textContent = data.data[i].directionsInfo;
+//         p1El.textContent = data.data[i].fullName;
+//         // p2El.textContent =  data.data[i].description;
+//         // p3El.textContent = data.data[i].directionsInfo;
 
-        parkEl.appendChild(p1El);
-        // basicInfoskEl.appendChild(p2El);
-        // directionEl.appendChild(p3El);
-      }
-    });
-};
-
-// New city search button event listener
-$("#submit-button").on("click", (event) => {
-  event.preventDefault();
-  currentState = $("#state-input").val();
-  console.log(event);
-  getApi();
-});
-
-// MAP API /Caitlin below
-
-var goButton = document.getElementById("submit-button"),
-  requestOptions = {
-    method: "POST",
-    redirect: "follow",
-    mode: "no-cors",
-  };
-
-fetch(
-  "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=national park&inputtype=textquery&fields=formatted_address,name,rating&locationbias=circle:2000@47.6918452,-122.2226413&key=AIzaSyD1vmdNp2nQIkRFAzPqTGnMtDYLRRVBoqc",
-  requestOptions
-)
-  .then((response) => response.text())
-  .then((dataStr) => {
-    let data = JSON.parse(dataStr);
-    console.log(data.candidates[0].name);
-    var parkName = data.candidates[0].name;
-    document.getElementById("official-name").textContent = parkName;
-  })
-  .catch((error) => console.log("error", error));
-
-//   var listParks = document.getElementById("show-park");
-//   let namesEl = document.createElement("p");
-//   namesEl.textContent = data.candidates[0].name;
-//   listParks.appendChild(namesEl);
-requestOptions = {
-  method: "GET",
-  redirect: "follow",
-};
-fetch("https://ipapi.co/json/", requestOptions)
-  .then((response) => response.text())
-  .then((dataStr) => {
-    let data = JSON.parse(dataStr);
-    console.log(data.region_code);
-  });
-;
-
-
+//         parkEl.appendChild(p1El);
+//         // basicInfoskEl.appendChild(p2El);
+//         // directionEl.appendChild(p3El);
+//       }
+//     });
+// };
 
 
 // DAVID BUSHARD CODE
 function parkInfoDisplay(parkData) {
   // Info Card
-  var parkName = parkData.data[0].fullName
-  var parkInfo = parkData.data[0].description
-  document.getElementById('park-name').textContent = parkName
-  document.getElementById('park-info').textContent = parkInfo
-
+  var parkName = parkData.data[0].fullName;
+  var parkInfo = parkData.data[0].description;
+  document.getElementById("park-name").textContent = parkName;
+  document.getElementById("park-info").textContent = parkInfo;
   // Activities Card
-    
-  var empty =[]
-    
-  for (var i = 0; i < 20; i++){
-      var parkActivities = parkData.data[0].activities[i].name
-      empty.push(parkActivities)
 
-      // console.log("this is park activities array " + parkActivities);
-     }
+  var empty = [];
 
-empty.forEach(function(x){
-  var list = document.createElement('li');
-  list.textContent = x;
-  var parks = document.getElementById('park-activities');
-  parks.append(list);
-});
+  for (var i = 0; i < 20; i++) {
+    var parkActivities = parkData.data[0].activities[i].name;
+    empty.push(parkActivities);
 
-    
-  //   if parkData.data[0].activities[0].name.length 
+    // console.log("this is park activities array " + parkActivities);
+  }
+
+  empty.forEach(function (x) {
+    var list = document.createElement("li");
+    list.textContent = x;
+    var parks = document.getElementById("park-activities");
+    console.log(list)
+    parks.append(list);
+  });
+
+  //   if parkData.data[0].activities[0].name.length
   // }
 
   // Direction Card
@@ -121,30 +72,78 @@ empty.forEach(function(x){
   //     document.getElementById('park-image').src = parkImage;
   // console.log(parkImage);
   return;
-};
+}
 
-fetch("https://developer.nps.gov/api/v1/parks?api_key=vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E&q=parks")
-  .then(response => response.json())
-  .then(parkData => {
+fetch(
+  "https://developer.nps.gov/api/v1/parks?api_key=vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E&q=parks"
+ )
+  .then((response) => response.json())
+  .then((parkData) => {
     if (parkData) {
-      parkInfoDisplay(parkData)
+      parkInfoDisplay(parkData);
     }
-    console.log(parkData)
+    console.log(parkData);
+    return;
+  });
+;
+
+// End of David
+
+
+
+// Caitlin and Drissa
+function statePark(Statedata) {
+
+  var emptyStates= [];
+
+  for (var i = 0; i < Statedata.data.length; i++) {
+    console.log(Statedata.data)
+    var nameNames = Statedata.data[i].fullName;
+    console.log(nameNames)
+    emptyStates.push(nameNames);
+   console.log(emptyStates)
+    
+  }
+  emptyStates.forEach(function (a) {
+    var listParks = document.createElement("li");
+    listParks.textContent = a;
+    console.log(listParks)
+    var seeNames = document.getElementById("park-name");
+    seeNames.append(listParks);
+  });
+  return;
+}
+
+
+requestOptions = {
+  method: "GET",
+  redirect: "follow",
+};
+fetch("https://ipapi.co/json/", requestOptions)
+  .then((response) => response.json())
+  .then((IPdata) => {
+    console.log(IPdata.region_code);
+    var yourST = IPdata.region_code;
+    console.log(yourST + "hello");
+
+    return fetch(
+      "https://developer.nps.gov/api/v1/parks?stateCode=" +
+        yourST +
+        "&api_key=" +
+        api_key,
+      requestOptions
+    );
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .then((Statedata) => {
+    if (Statedata) {
+      statePark(Statedata);
+    }
+    console.log(Statedata);
     return;
   });
 
 
 
-
-// Caitlin and Drissa 
-requestOptions = {
-  method: "GET",
-  redirect: "follow",
-};
-fetch(
-  "https://ipapi.co/json/", requestOptions
-).then((response) => response.text())
-  .then((dataStr) => {
-    let data = JSON.parse(dataStr);
-    console.log(data.region_code);
-  })
