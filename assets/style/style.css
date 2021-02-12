@@ -1,6 +1,13 @@
 /* MAIN BODY STYLING */
 html{
+
     background-color: #f6f6f6 !important;
+}
+p{
+    font-family: 'Roboto', sans-serif;
+}
+h5{
+    font-family: 'Roboto', sans-serif;
 }
 /* THINGS THAT DONT CHANGE */
 .main-title{
@@ -8,12 +15,18 @@ html{
     background-color: #f6f6f6;
     text-align: center;
 }
+
+h5{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
 /* Is is the Main Hero Text */
-.is-1{
-    font-family: 'Vast Shadow', cursive;
-    color: #264041 !important;
-    -webkit-text-stroke-width: .25px ;
-    -webkit-text-stroke-color:#b8c9d3 ;
+.hero-title{
+    font-size: 100px;
+    font-family: 'Fredoka One', cursive;
+    color: #f6f6f6 !important;
+    -webkit-text-stroke-width: 2px ;
+    -webkit-text-stroke-color:#264041 ;
 }
 
 /* NAV BAR */
@@ -55,16 +68,30 @@ html{
     margin: 20px;
 }
 
+
+
 /* RANDOM PARK GENERATOR */
 .random-park-img{
+    background-image: url("../images/forest-5319107-01.png");
+    background-size: cover;
     background-color: #264041;
+    width: 100%;
+    height: auto;
     text-align: right;
 }
 p.random-park-title{
+    font-family: 'Fredoka One', cursive;
     color: #f6f6f6 !important;
 }
 
 footer{
     background-color: #4a4a4a !important;
     padding: 1rem !important;
+}
+
+@media(max-width: 768px) {
+ .hero-title{
+    font-size: 50px;
+    -webkit-text-stroke-width: .75px ;
+}
 }

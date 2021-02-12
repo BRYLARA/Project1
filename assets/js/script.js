@@ -38,39 +38,46 @@ var api_key = "vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E";
 // };
 
 
+
+
+
+
 // DAVID BUSHARD CODE
 function parkInfoDisplay(parkData) {
   // Info Card
   var parkName = parkData.data[0].fullName;
   var parkInfo = parkData.data[0].description;
-  document.getElementById("park-name").textContent = parkName;
-  document.getElementById("park-info").textContent = parkInfo;
+  var parkWeatherInfo = parkData.data[0].weatherInfo;
+  document.getElementById('park-name').textContent = parkName;
+  document.getElementById('park-info').textContent = parkInfo;
+  document.getElementById('park-weather-info').textContent = parkWeatherInfo;
+  
+  
+  
+  
+  
+  
   // Activities Card
 
-  var empty = [];
-
+  var activitiesArray = []
   for (var i = 0; i < 20; i++) {
-    var parkActivities = parkData.data[0].activities[i].name;
-    empty.push(parkActivities);
+    var parkActivities = parkData.data[0].activities[i].name
+    activitiesArray.push(parkActivities)
 
     // console.log("this is park activities array " + parkActivities);
-  }
+  };
 
-  empty.forEach(function (x) {
-    var list = document.createElement("li");
+  activitiesArray.forEach(function (x) {
+    var list = document.createElement('li');
     list.textContent = x;
-    var parks = document.getElementById("park-activities");
-    console.log(list)
+    var parks = document.getElementById('park-activities');
     parks.append(list);
   });
 
-  //   if parkData.data[0].activities[0].name.length
-  // }
 
   // Direction Card
-  //     var parkImage = parkData.data[0].images[0].url + '.jpg'
-  //     document.getElementById('park-image').src = parkImage;
-  // console.log(parkImage);
+  var parkImage = parkData.data[0].images[1].url
+  document.getElementById('park-image').src = parkImage;
   return;
 }
 
@@ -91,7 +98,7 @@ fetch(
 
 
 
-// Caitlin and Drissa
+// Caitlin State stuff
 function statePark(Statedata) {
 
   var emptyStates= [];
