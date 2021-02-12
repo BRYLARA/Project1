@@ -89,37 +89,33 @@ fetch("https://ipapi.co/json/", requestOptions)
 // DAVID BUSHARD CODE
 function parkInfoDisplay(parkData) {
   // Info Card
-  var parkName = parkData.data[0].fullName
-  var parkInfo = parkData.data[0].description
-  document.getElementById('park-name').textContent = parkName
-  document.getElementById('park-info').textContent = parkInfo
-
+  var parkName = parkData.data[0].fullName;
+  var parkInfo = parkData.data[0].description;
+  var parkWeatherInfo = parkData.data[0].weatherInfo;
+  document.getElementById('park-name').textContent = parkName;
+  document.getElementById('park-info').textContent = parkInfo;
+  document.getElementById('park-weather-info').textContent = parkWeatherInfo;
   // Activities Card
-    
-  var empty =[]
-    
-  for (var i = 0; i < 20; i++){
-      var parkActivities = parkData.data[0].activities[i].name
-      empty.push(parkActivities)
 
-      // console.log("this is park activities array " + parkActivities);
-     }
+  var activitiesArray = []
+  for (var i = 0; i < 20; i++) {
+    var parkActivities = parkData.data[0].activities[i].name
+    activitiesArray.push(parkActivities)
 
-empty.forEach(function(x){
-  var list = document.createElement('li');
-  list.textContent = x;
-  var parks = document.getElementById('park-activities');
-  parks.append(list);
-});
+    // console.log("this is park activities array " + parkActivities);
+  };
 
-    
-  //   if parkData.data[0].activities[0].name.length 
-  // }
+  activitiesArray.forEach(function (x) {
+    var list = document.createElement('li');
+    list.textContent = x;
+    var parks = document.getElementById('park-activities');
+    parks.append(list);
+  });
+
 
   // Direction Card
-  //     var parkImage = parkData.data[0].images[0].url + '.jpg'
-  //     document.getElementById('park-image').src = parkImage;
-  // console.log(parkImage);
+  var parkImage = parkData.data[0].images[1].url
+  document.getElementById('park-image').src = parkImage;
   return;
 };
 
@@ -133,18 +129,3 @@ fetch("https://developer.nps.gov/api/v1/parks?api_key=vGDXf8DoFmcbZXhc3BjABck16B
     return;
   });
 
-
-
-
-// Caitlin and Drissa 
-requestOptions = {
-  method: "GET",
-  redirect: "follow",
-};
-fetch(
-  "https://ipapi.co/json/", requestOptions
-).then((response) => response.text())
-  .then((dataStr) => {
-    let data = JSON.parse(dataStr);
-    console.log(data.region_code);
-  })

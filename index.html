@@ -8,27 +8,31 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <!-- Googlefonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Vast+Shadow&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@300&display=swap"
+        rel="stylesheet">
 
 
     <!-- our style sheet -->
     <link rel="stylesheet" href="./assets/style/style.css">
 
 
-    <title>Document</title>
+    <title>ParkBuddy</title>
 </head>
 
 <body>
     <!-- HERO IMAGE -->
     <section class="hero is-primary is-medium">
 
-       
+
         <!-- Hero content: will be in the middle -->
 
         <div class="hero-body hero-img">
-            <h1 class="title is-1">National Parks</h1>
-            <input id="state-input" class="input is-rounded" type="text" name="" value="" placeholder="Enter the state initial here">
-            <button  id="submit-button" class="button">Submit</button>
+            <h1 class="hero-title">ParkBuddy</h1>
+            <input id="state-input" class="input is-rounded" type="text" name="" value=""
+                placeholder="Enter the state initial here">
+            <button id="submit-button" class="button">Submit</button>
         </div>
         </div>
     </section>
@@ -48,18 +52,21 @@
             <article class="message is-small">
                 <div class="message-header">
                     <p id="park-name"></p>
-                    <button class="delete is-small" aria-label="delete"></button>
                 </div>
                 <div class="message-body">
+
+                    <h5>About the park</h5>
                     <p id="park-info"></p>
+                    <br>
+                    <h5>Whats the weather like?</h5>
+                    <p id="park-weather-info"></p>
                 </div>
             </article>
         </div>
         <div class="column">
             <article class="message is-small">
                 <div class="message-header">
-                    <p>Activities?</p>
-                    <button class="delete is-small" aria-label="delete"></button>
+                    <p>Activities</p>
                 </div>
                 <div class="message-body">
                     <p id="park-activities"></p>
@@ -69,11 +76,11 @@
         <div class="column">
             <article class="message is-small">
                 <div class="message-header">
-                    <p>Directions?</p>
-                    <button class="delete is-small" aria-label="delete"></button>
+                    <p>Directions and </p>
                 </div>
                 <div class="message-body">
-                   <span><img src="" alt=""></span>
+                    <p id="park-address"></p>
+                    <img id="park-image" src="" alt="Image of the Park" height="300px" width="auto">
                 </div>
             </article>
         </div>
@@ -84,32 +91,33 @@
             <p class="title random-park-title">
                 Explore our Nation Parks!
             </p>
-        <button class="button random-park-button">Random Park</button>
-            
+            <button class="button random-park-button">Random Park</button>
+
         </div>
-        
+
     </section>
-  
-
-
-<footer class="footer">
-    <div class="content has-text-centered">
-        <p>
-            <strong>&copy; Caitlin Murphy, David Bushard, Drissa Bagate, Bryan Lara </strong> 
-        </p>
-    </div>
-</footer>
-    
-
-<!-- Scripts Go Here -->
 
 
 
-<!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>&copy; Caitlin Murphy, David Bushard, Drissa Bagate, Bryan Lara </strong>
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- Scripts Go Here -->
+
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
-    <script
-  src="https://maps.googleapis.com/maps/api/js?keyAIzaSyA_hZqWHClBzWa05VtjZvkHB33MK09sDb4=&libraries=places
+    <script src="https://maps.googleapis.com/maps/api/js?keyAIzaSyA_hZqWHClBzWa05VtjZvkHB33MK09sDb4=&libraries=places
   async defer></script>
 </body>
 
