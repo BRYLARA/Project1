@@ -41,27 +41,34 @@ var api_key = "vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E";
 
 
 
+// Caitlin State stuff
+function statePark(Statedata) {
 
-// DAVID BUSHARD CODE
-function parkInfoDisplay(parkData) {
-  // Info Card
-  var parkName = parkData.data[0].fullName;
-  var parkInfo = parkData.data[0].description;
-  var parkWeatherInfo = parkData.data[0].weatherInfo;
-  document.getElementById('park-name').textContent = parkName;
-  document.getElementById('park-info').textContent = parkInfo;
-  document.getElementById('park-weather-info').textContent = parkWeatherInfo;
-  
-  
-  
-  
-  
-  
-  // Activities Card
+  var emptyStates= [];
+
+  for (var i = 0; i < Statedata.data.length; i++) {
+    console.log(Statedata.data)
+    var nameNames = Statedata.data[i].fullName;
+    console.log(nameNames)
+    emptyStates.push(nameNames);
+
+   console.log(emptyStates) 
+  }
+
+
+  emptyStates.forEach(function (a) {
+    var listParks = document.createElement("li");
+    listParks.textContent = a;
+
+    console.log(listParks)
+    
+    var seeNames = document.getElementById("park-list");
+    seeNames.append(listParks);
+  });
 
   var activitiesArray = []
   for (var i = 0; i < 20; i++) {
-    var parkActivities = parkData.data[0].activities[i].name
+    var parkActivities = Statedata.data[0].activities[i].name
     activitiesArray.push(parkActivities)
 
     // console.log("this is park activities array " + parkActivities);
@@ -75,52 +82,19 @@ function parkInfoDisplay(parkData) {
   });
 
 
-  // Direction Card
-  var parkImage = parkData.data[0].images[1].url
+  var parkImage = Statedata.data[0].images[1].url
   document.getElementById('park-image').src = parkImage;
-  return;
+ 
+ 
+  var parkName = Statedata.data[0].fullName;
+  var parkInfo = Statedata.data[0].description;
+  var parkWeatherInfo = Statedata.data[0].weatherInfo; 
+  document.getElementById('park-name').textContent = parkName;
+  document.getElementById('park-info').textContent = parkInfo;
+  document.getElementById('park-weather-info').textContent = parkWeatherInfo;
+  
+  return; 
 }
-
-fetch(
-  "https://developer.nps.gov/api/v1/parks?api_key=vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E&q=parks"
- )
-  .then((response) => response.json())
-  .then((parkData) => {
-    if (parkData) {
-      parkInfoDisplay(parkData);
-    }
-    console.log(parkData);
-    return;
-  });
-;
-
-// End of David
-
-
-
-// Caitlin State stuff
-function statePark(Statedata) {
-
-  var emptyStates= [];
-
-  for (var i = 0; i < Statedata.data.length; i++) {
-    console.log(Statedata.data)
-    var nameNames = Statedata.data[i].fullName;
-    console.log(nameNames)
-    emptyStates.push(nameNames);
-   console.log(emptyStates)
-    
-  }
-  emptyStates.forEach(function (a) {
-    var listParks = document.createElement("li");
-    listParks.textContent = a;
-    console.log(listParks)
-    var seeNames = document.getElementById("park-name");
-    seeNames.append(listParks);
-  });
-  return;
-}
-
 
 requestOptions = {
   method: "GET",
@@ -129,8 +103,11 @@ requestOptions = {
 fetch("https://ipapi.co/json/", requestOptions)
   .then((response) => response.json())
   .then((IPdata) => {
+    
     console.log(IPdata.region_code);
+    
     var yourST = IPdata.region_code;
+    
     console.log(yourST + "hello");
 
     return fetch(
