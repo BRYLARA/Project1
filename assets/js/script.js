@@ -1,133 +1,94 @@
 var api_key = "vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E";
-// var currentState = "";
-// // GETTING ALL PARKS USING STATE CODE
-
-// var getApi = function () {
-//   let stateCode = $("#state-input").val();
-//   console.log(stateCode);
-//   let requestUrl =
-//     "https://developer.nps.gov/api/v1/parks?stateCode=" +
-//     stateCode +
-//     "&api_key=" +
-//     api_key;
-//   fetch(requestUrl)
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data);
-//       for (let i = 0; i < data.data.length; i++) {
-//         // var parkEl = document.getElementById("show-park");
-//         // var directionEl =document.getElementById("showPark");
-//         // var basicInfoskEl =document.getElementById("showParkBasicInfos");
-//         // var activitiesEl =document.getElementById("showParkDirection");
-
-//         let p1El = document.createElement("p");
-//         // let p2El = document.createElement("p");
-//         // let p3El = document.createElement("p");
-
-//         p1El.textContent = data.data[i].fullName;
-//         // p2El.textContent =  data.data[i].description;
-//         // p3El.textContent = data.data[i].directionsInfo;
-
-//         parkEl.appendChild(p1El);
-//         // basicInfoskEl.appendChild(p2El);
-//         // directionEl.appendChild(p3El);
-//       }
-//     });
-// };
-
-
-
-
 
 // Caitlin State stuff
-function statePark(Statedata) {
 
-  var emptyStates= [];
+function statePark(Statedata) {
+  var emptyStates = [];
 
   for (var i = 0; i < Statedata.data.length; i++) {
-    console.log(Statedata.data)
+    console.log(Statedata.data);
     var nameNames = Statedata.data[i].fullName;
-    console.log(nameNames)
+    console.log(nameNames);
     emptyStates.push(nameNames);
-
-   console.log(emptyStates) 
+    console.log(emptyStates);
   }
-
-
-  emptyStates.forEach(function (a) {
+  emptyStates.forEach(function (a, index) {
     var listParks = document.createElement("li");
     listParks.textContent = a;
-
-    console.log(listParks)
-    
+    listParks.setAttribute("data-idx", index);
+    console.log(listParks);
+    console.log("data-idx", index);
     var seeNames = document.getElementById("park-list");
     seeNames.append(listParks);
+    console.log(seeNames);
+
+    listParks.addEventListener("click", function (e) {
+      var index = e.target.getAttribute("data-idx");
+      console.log(index);
+      var parkInfo = Statedata.data[index].description;
+      var seeInfo = document.getElementById("park-info");
+      seeInfo.append(parkInfo);
+
+      var seeWeather = Statedata.data[index].weatherInfo;
+      var postWeather = document.getElementById("park-weather-info");
+      postWeather.append(seeWeather);
+
+      var seeImg = Statedata.data[index].images[0].url;
+
+      var postImg = (document.getElementById("park-image").src = seeImg);
+
+      var activitiesArray = [];
+      for (var i = 0; i < 20; i++) {
+        var parkActivities = Statedata.data[index].activities[i].name;
+        activitiesArray.push(parkActivities);
+      }
+      activitiesArray.forEach(function (x) {
+        var list = document.createElement("li");
+        list.textContent = x;
+        var parks = document.getElementById("park-activities");
+        parks.append(list);
+      });
+    });
   });
-
-  var activitiesArray = []
-  for (var i = 0; i < 20; i++) {
-    var parkActivities = Statedata.data[0].activities[i].name
-    activitiesArray.push(parkActivities)
-
-    // console.log("this is park activities array " + parkActivities);
-  };
-
-  activitiesArray.forEach(function (x) {
-    var list = document.createElement('li');
-    list.textContent = x;
-    var parks = document.getElementById('park-activities');
-    parks.append(list);
-  });
-
-
-  var parkImage = Statedata.data[0].images[1].url
-  document.getElementById('park-image').src = parkImage;
- 
- 
-  var parkName = Statedata.data[0].fullName;
-  var parkInfo = Statedata.data[0].description;
-  var parkWeatherInfo = Statedata.data[0].weatherInfo; 
-  document.getElementById('park-name').textContent = parkName;
-  document.getElementById('park-info').textContent = parkInfo;
-  document.getElementById('park-weather-info').textContent = parkWeatherInfo;
-  
-  return; 
+  return;
 }
 
+// Caitlin and Drissa
 requestOptions = {
   method: "GET",
   redirect: "follow",
 };
 fetch("https://ipapi.co/json/", requestOptions)
-  .then((response) => response.json())
-  .then((IPdata) => {
-    
-    console.log(IPdata.region_code);
-    
-    var yourST = IPdata.region_code;
-    
-    console.log(yourST + "hello");
+  .then((response) => response.text())
+  .then((dataStr) => {
+    let data = JSON.parse(dataStr);
+    console.log(data.region_code);
+    fetch("https://ipapi.co/json/", requestOptions)
+      .then((response) => response.json())
+      .then((IPdata) => {
+        console.log(IPdata.region_code);
+        var yourST = IPdata.region_code;
+        console.log(yourST + "hello");
 
-    return fetch(
-      "https://developer.nps.gov/api/v1/parks?stateCode=" +
-        yourST +
-        "&api_key=" +
-        api_key,
-      requestOptions
-    );
-  })
-  .then((response) => {
-    return response.json();
-  })
-  .then((Statedata) => {
-    if (Statedata) {
-      statePark(Statedata);
-    }
-    console.log(Statedata);
-    return;
+        return fetch(
+          "https://developer.nps.gov/api/v1/parks?stateCode=" +
+            yourST +
+            "&api_key=" +
+            api_key,
+          requestOptions
+        );
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((Statedata) => {
+        if (Statedata) {
+          statePark(Statedata);
+        }
+    
+        return;
+      });
   });
 
-
-
+// LocalStorage function
+// Click event on "Random Park" button, outputs from name array[i] and saves to local storage (Set localStorage). When page loads (get localStorage) and display last result from pushing "Random Park". If button is pushed again recognize two items in localStorage and only save 1 so not too much info is displayed. Maybe write a message to user before button is clicked? "Discover other parks in the US!"?
