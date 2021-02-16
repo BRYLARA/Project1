@@ -1,14 +1,5 @@
 var api_key = "vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E";
 
-// Caitlin State stuff
-
-
-// HERE YOU ALSO NEED CSS CHANGES
-// .show{
-// display: none;
-// }
-
-// ALSO I need to add a div with a class of show before everything
 var findParkBtn = document.querySelector("#startFindLocalPark");
 
 findParkBtn.addEventListener("click", function(){
