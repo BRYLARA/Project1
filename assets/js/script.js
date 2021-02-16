@@ -58,6 +58,8 @@ function statePark(Statedata) {
       //HERE 
       var seeParkName = Statedata.data[index].name;
       var postParkName = document.getElementById("park-name");
+      postParkName.textContent="";
+  
       postParkName.append(seeParkName);
 
 
