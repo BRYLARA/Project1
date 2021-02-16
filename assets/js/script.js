@@ -1,10 +1,9 @@
 var api_key = "vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E";
 
-
 // Display current State parks categories
 
 function statePark(Statedata) {
-  
+
   var emptyStates = [];
 
   for (var i = 0; i < Statedata.data.length; i++) {
@@ -39,8 +38,25 @@ function statePark(Statedata) {
 
       var postImg = (document.getElementById("park-image").src = seeImg);
 
-      localStorage.setItem(("data-idx",index), seeInfo);
-      
+      // Local Storage
+
+      localStorage.setItem(("data-idx", index), seeInfo);
+
+      var viewLast= localStorage.getItem(("data-idx", index));
+      console.log(viewLast)
+      var lastInfo= document.getElementById("park-info")
+      console.log(lastInfo)
+
+
+      let pastInfo
+      if(localStorage.getItem('pastInfo') === null){
+        pastInfo = [];
+      }else{
+        pastInfo = JSON.parse(localStorage.getItem('pastInfo'));
+      }
+      pastInfo.push(lastInfo);
+
+      // 
 
       var activitiesArray = [];
       for (var i = 0; i < 20; i++) {
@@ -53,16 +69,12 @@ function statePark(Statedata) {
         var parks = document.getElementById("park-activities");
         parks.append(list);
       });
-      
-      var viewLast= localStorage.getItem(("data-idx", index));
-      document.getElementById("park-info").innerHTML = viewLast;
-
     });
   });
   return;
 }
 
-// Nested fetch calls to get State
+// Nested fetch calls to get user's State
 requestOptions = {
   method: "GET",
   redirect: "follow",
@@ -98,4 +110,3 @@ fetch("https://ipapi.co/json/", requestOptions)
         return;
       });
   });
-
