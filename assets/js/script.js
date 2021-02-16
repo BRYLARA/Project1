@@ -2,6 +2,24 @@ var api_key = "vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E";
 
 // Caitlin State stuff
 
+
+// HERE YOU ALSO NEED CSS CHANGES
+// .show{
+// display: none;
+// }
+
+// ALSO I need to add a div with a class of show before everything
+var findParkBtn = document.querySelector("#startFindLocalPark");
+
+findParkBtn.addEventListener("click", function(){
+
+  document.querySelector(".show").style.display = "block"
+});
+
+
+
+
+
 function statePark(Statedata) {
   var emptyStates = [];
 
@@ -32,6 +50,17 @@ function statePark(Statedata) {
       var seeWeather = Statedata.data[index].weatherInfo;
       var postWeather = document.getElementById("park-weather-info");
       postWeather.append(seeWeather);
+
+
+
+      //HERE 
+      var seeParkName = Statedata.data[index].name;
+      var postParkName = document.getElementById("park-name");
+      postParkName.append(seeParkName);
+
+
+
+
 
       var seeImg = Statedata.data[index].images[0].url;
 
