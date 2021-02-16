@@ -24,68 +24,63 @@
 <body>
     <!-- HERO IMAGE -->
     <section class="hero is-primary is-medium">
-
-
         <!-- Hero content: will be in the middle -->
-
         <div class="hero-body hero-img">
             <h1 class="hero-title">ParkBuddy</h1>
-            <input id="state-input" class="input is-rounded" type="text" name="" value=""
-                placeholder="Enter the state initial here">
-            <button id="submit-button" class="button">Submit</button>
+            <button id="startFindLocalPark" class="button">Find a park!</button>
         </div>
         </div>
     </section>
 
     <!-- CONTENT BLOCK -->
     <!-- this is all below the hero block should display results of park search -->
+    <div class="show">
+        <div class="section is-small">
+            <h2 id="show-park" class="subtitle">
+            </h2>
+            <div id="park-list"></div>
+        </div>
+        <div class="columns">
+            <div class="column">
 
-    <div class="section is-small">
-        <h2 id="show-park" class="subtitle">
-        </h2>
-        <div id="park-list"></div>
+                <article class="message is-small">
+                    <div class="message-header">
+                        <p>Park:</p>
+                        <p id="park-name"></p>
+                    </div>
+                    <div class="message-body">
+
+                        <h5>About the park</h5>
+                        <p id="park-info"></p>
+                        <br>
+                        <h5>Whats the weather like?</h5>
+                        <p id="park-weather-info"></p>
+                    </div>
+                </article>
+            </div>
+            <div class="column">
+                <article class="message is-small">
+                    <div class="message-header">
+                        <p>Activities</p>
+                    </div>
+                    <div class="message-body">
+                        <p id="park-activities"></p>
+                    </div>
+                </article>
+            </div>
+            <div class="column">
+                <article class="message is-small">
+                    <div class="message-header">
+                        <p>Park Image</p>
+                    </div>
+                    <div class="message-body">
+                        <p id="park-address"></p>
+                        <img id="park-image" src="" alt="Image of the Park" height="300px" width="auto">
+                    </div>
+                </article>
+            </div>
+        </div>
     </div>
-    <div class="columns">
-        <div class="column">
-
-            <article class="message is-small">
-                <div class="message-header">
-                    <p id=""></p>
-                    <button class="delete is-small" aria-label="delete"></button>
-                </div>
-                <div class="message-body">
-
-                    <h5>About the park</h5>
-                    <p id="park-info"></p>
-                    <br>
-                    <h5>Whats the weather like?</h5>
-                    <p id="park-weather-info"></p>
-                </div>
-            </article>
-        </div>
-        <div class="column">
-            <article class="message is-small">
-                <div class="message-header">
-                    <p>Activities</p>
-                </div>
-                <div class="message-body">
-                    <p id="park-activities"></p>
-                </div>
-            </article>
-        </div>
-        <div class="column">
-            <article class="message is-small">
-                <div class="message-header">
-                    <p>Directions and </p>
-                </div>
-                <div class="message-body">
-                    <p id="park-address"></p>
-                    <img id="park-image" src="" alt="Image of the Park" height="300px" width="auto">
-                </div>
-            </article>
-        </div>
-    </div>
-
     <section class="hero is-small is-secondary">
         <div class="hero-body random-park-img">
             <p class="title random-park-title">
