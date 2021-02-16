@@ -65,12 +65,23 @@ function statePark(Statedata) {
       var seeImg = Statedata.data[index].images[0].url;
 
       var postImg = (document.getElementById("park-image").src = seeImg);
-
+      document.getElementById("park-activities").textContent = "";
+      // check and see if activites exist, if they dont exist we are done. 
+      // if they do exist, see how many activites there are
+      // if it exceeds 20 use 20, otherwise use total length // use turnorary 
+      // 
       var activitiesArray = [];
-      for (var i = 0; i < 20; i++) {
+      var sdidx = Statedata.data[index];
+      var totalActivities = Statedata.data[index].activities &&  Statedata.data[index].activities ; 
+      var numberActivities = sdidx.activities && sdidx.activities.length < 20 ? sdidx.activities.length : 20;
+      for (var i = 0; i < numberActivities; i++) {
         var parkActivities = Statedata.data[index].activities[i].name;
         activitiesArray.push(parkActivities);
       }
+      console.log("hi",numberActivities)
+      // if (numberActivities === 0){
+     
+      // }
       activitiesArray.forEach(function (x) {
         var list = document.createElement("li");
         list.textContent = x;
