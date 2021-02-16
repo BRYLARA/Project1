@@ -45,10 +45,12 @@ function statePark(Statedata) {
       console.log(index);
       var parkInfo = Statedata.data[index].description;
       var seeInfo = document.getElementById("park-info");
+      seeInfo.textContent="";
       seeInfo.append(parkInfo);
 
       var seeWeather = Statedata.data[index].weatherInfo;
       var postWeather = document.getElementById("park-weather-info");
+      postWeather.textContent="";
       postWeather.append(seeWeather);
 
 
@@ -66,14 +68,12 @@ function statePark(Statedata) {
 
       var postImg = (document.getElementById("park-image").src = seeImg);
       document.getElementById("park-activities").textContent = "";
-      // check and see if activites exist, if they dont exist we are done. 
-      // if they do exist, see how many activites there are
-      // if it exceeds 20 use 20, otherwise use total length // use turnorary 
-      // 
+
       var activitiesArray = [];
       var sdidx = Statedata.data[index];
       var totalActivities = Statedata.data[index].activities &&  Statedata.data[index].activities ; 
       var numberActivities = sdidx.activities && sdidx.activities.length < 20 ? sdidx.activities.length : 20;
+      
       for (var i = 0; i < numberActivities; i++) {
         var parkActivities = Statedata.data[index].activities[i].name;
         activitiesArray.push(parkActivities);
