@@ -59,10 +59,17 @@ function statePark(Statedata) {
       // 
 
       var activitiesArray = [];
-      for (var i = 0; i < 20; i++) {
+      var sdidx = Statedata.data[index];
+      var totalActivities = Statedata.data[index].activities &&  Statedata.data[index].activities ; 
+      var numberActivities = sdidx.activities && sdidx.activities.length < 20 ? sdidx.activities.length : 20;
+      for (var i = 0; i < numberActivities; i++) {
         var parkActivities = Statedata.data[index].activities[i].name;
         activitiesArray.push(parkActivities);
       }
+      console.log("hi",numberActivities)
+      // if (numberActivities === 0){
+     
+      // }
       activitiesArray.forEach(function (x) {
         var list = document.createElement("li");
         list.textContent = x;
