@@ -27,7 +27,7 @@
         <!-- Hero content: will be in the middle -->
         <div class="hero-body hero-img">
             <h1 class="hero-title">ParkBuddy</h1>
-            <button id="startFindLocalPark" class="button">Find a park!</button>
+            <button id="startFindLocalPark" class="button">Find a park in your area!</button>
         </div>
         </div>
     </section>
@@ -36,17 +36,16 @@
     <!-- this is all below the hero block should display results of park search -->
     <div class="show">
         <div class="section is-small">
-            <h2 id="show-park" class="subtitle">
+            <h2 id="show-park" class="subtitle">Select a park from the list below!
             </h2>
-            <div id="park-list"></div>
+            <div id="park-list" class="pointer"></div>
         </div>
+        <div><p id="park-name"></p></div>
         <div class="columns">
             <div class="column">
-
                 <article class="message is-small">
                     <div class="message-header">
-                        <p>Park:</p>
-                        <p id="park-name"></p>
+                        <h3>Park Info</h3>
                     </div>
                     <div class="message-body">
 
@@ -55,13 +54,16 @@
                         <br>
                         <h5>Whats the weather like?</h5>
                         <p id="park-weather-info"></p>
+                        <br>
+                        <h5>Entrance Fee for Park:</h5>
+                        <span>$ <span id="park-fee"></span> </span>- <span id="park-fee-info"></span>
                     </div>
                 </article>
             </div>
             <div class="column">
                 <article class="message is-small">
                     <div class="message-header">
-                        <p>Activities</p>
+                        <h3>Activities</h3>
                     </div>
                     <div class="message-body">
                         <p id="park-activities"></p>
@@ -71,10 +73,9 @@
             <div class="column">
                 <article class="message is-small">
                     <div class="message-header">
-                        <p>Park Image</p>
+                        <h3>Park Image</h3>
                     </div>
                     <div class="message-body">
-                        <p id="park-address"></p>
                         <img id="park-image" src="" alt="Image of the Park" height="300px" width="auto">
                     </div>
                 </article>
@@ -86,13 +87,8 @@
             <p class="title random-park-title">
                 Explore our Nation Parks!
             </p>
-            <button class="button random-park-button">Random Park</button>
-
         </div>
-
     </section>
-
-
 
     <footer class="footer">
         <div class="content has-text-centered">
