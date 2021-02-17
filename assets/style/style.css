@@ -95,3 +95,7 @@ footer{
     -webkit-text-stroke-width: .75px ;
 }
 }
+
+.show{
+    display: none;
+}

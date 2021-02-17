@@ -1,6 +1,33 @@
 var api_key = "vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E";
+var lastKey = localStorage.getItem('lastKey');
 
+
+window.onload= function(){
+  var viewLast= localStorage.getItem(lastKey);
+      console.log(viewLast)
+      var lastInfo= document.getElementById("park-info")
+      console.log(lastInfo)
+     lastInfo.innerHTML = viewLast;
+};
 // Display current State parks categories
+
+
+// HERE YOU ALSO NEED CSS CHANGES
+// .show{
+// display: none;
+// }
+
+// ALSO I need to add a div with a class of show before everything
+var findParkBtn = document.querySelector("#startFindLocalPark");
+
+findParkBtn.addEventListener("click", function(){
+
+  document.querySelector(".show").style.display = "block"
+});
+
+
+
+
 
 function statePark(Statedata) {
 
@@ -26,13 +53,27 @@ function statePark(Statedata) {
     listParks.addEventListener("click", function (e) {
       var index = e.target.getAttribute("data-idx");
       console.log(index);
-      var seeInfo = Statedata.data[index].description;
-      var postInfo = document.getElementById("park-info");
-      postInfo.append(seeInfo);
+      var parkInfo = Statedata.data[index].description;
+      var seeInfo = document.getElementById("park-info");
+      seeInfo.textContent="";
+      seeInfo.append(parkInfo);
 
       var seeWeather = Statedata.data[index].weatherInfo;
       var postWeather = document.getElementById("park-weather-info");
+      postWeather.textContent="";
       postWeather.append(seeWeather);
+
+
+
+      //HERE 
+      var seeParkName = Statedata.data[index].name;
+      var postParkName = document.getElementById("park-name");
+      postParkName.textContent="";
+      postParkName.append(seeParkName);
+
+
+
+
 
       var seeImg = Statedata.data[index].images[0].url;
 
@@ -40,21 +81,13 @@ function statePark(Statedata) {
 
       // Local Storage
 
-      localStorage.setItem(("data-idx", index), seeInfo);
+      localStorage.setItem(index, parkInfo);
 
-      var viewLast= localStorage.getItem(("data-idx", index));
-      console.log(viewLast)
-      var lastInfo= document.getElementById("park-info")
-      console.log(lastInfo)
+      console.log(index)
+      var lock = index
+      console.log(lock)
 
-
-      let pastInfo
-      if(localStorage.getItem('pastInfo') === null){
-        pastInfo = [];
-      }else{
-        pastInfo = JSON.parse(localStorage.getItem('pastInfo'));
-      }
-      pastInfo.push(lastInfo);
+      localStorage.setItem("lastKey", lock);
 
       // 
 
@@ -62,6 +95,7 @@ function statePark(Statedata) {
       var sdidx = Statedata.data[index];
       var totalActivities = Statedata.data[index].activities &&  Statedata.data[index].activities ; 
       var numberActivities = sdidx.activities && sdidx.activities.length < 20 ? sdidx.activities.length : 20;
+      
       for (var i = 0; i < numberActivities; i++) {
         var parkActivities = Statedata.data[index].activities[i].name;
         activitiesArray.push(parkActivities);
