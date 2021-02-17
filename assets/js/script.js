@@ -1,18 +1,14 @@
 var api_key = "vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E";
 
 var findParkBtn = document.querySelector("#startFindLocalPark");
-
 findParkBtn.addEventListener("click", function(){
-
   document.querySelector(".show").style.display = "block"
 });
 
-
-
-
-
 function statePark(Statedata) {
   var emptyStates = [];
+
+  console.log(Statedata);
 
   for (var i = 0; i < Statedata.data.length; i++) {
     console.log(Statedata.data);
@@ -45,20 +41,23 @@ function statePark(Statedata) {
       postWeather.append(seeWeather);
 
 
-
-      //HERE 
       var seeParkName = Statedata.data[index].name;
       var postParkName = document.getElementById("park-name");
       postParkName.textContent="";
-  
       postParkName.append(seeParkName);
 
+      var seeParkFee = Statedata.data[index].entranceFees[0].cost;
+      var postParkFee = document.getElementById("park-fee");
+      postParkFee.textContent="";
+      postParkFee.append(seeParkFee);
 
-
-
+      var seeParkFeeInfo = Statedata.data[index].entranceFees[0].description;
+      var postParkFeeInfo = document.getElementById("park-fee-info");
+      postParkFeeInfo.textContent = "";
+      postParkFeeInfo.append(seeParkFeeInfo);
+      
 
       var seeImg = Statedata.data[index].images[0].url;
-
       var postImg = (document.getElementById("park-image").src = seeImg);
       document.getElementById("park-activities").textContent = "";
 
@@ -71,10 +70,7 @@ function statePark(Statedata) {
         var parkActivities = Statedata.data[index].activities[i].name;
         activitiesArray.push(parkActivities);
       }
-      console.log("hi",numberActivities)
-      // if (numberActivities === 0){
-     
-      // }
+  
       activitiesArray.forEach(function (x) {
         var list = document.createElement("li");
         list.textContent = x;
@@ -86,11 +82,11 @@ function statePark(Statedata) {
   return;
 }
 
-// Caitlin and Drissa
 requestOptions = {
   method: "GET",
   redirect: "follow",
 };
+
 fetch("https://ipapi.co/json/", requestOptions)
   .then((response) => response.text())
   .then((dataStr) => {
