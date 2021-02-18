@@ -1,9 +1,48 @@
 var api_key = "vGDXf8DoFmcbZXhc3BjABck16B2RdO6qNrXKXX1E";
+var lastKey = localStorage.getItem("lastKey");
+var savedKey = localStorage.getItem("savedKey");
+var latestKey = localStorage.getItem("latestKey");
+var priceKey = localStorage.getItem("priceKey");
+var feeKey= localStorage.getItem("feeKey");
+
+// Getting Local Storage
+
+window.onload = function () {
+  var saveLast = localStorage.getItem(lastKey);
+  var lastInfo = document.getElementById("park-info");
+  lastInfo.innerHTML = saveLast;
+
+  var saveWeather = localStorage.getItem(savedKey);
+  var lastWeather = document.getElementById("park-weather-info");
+  lastWeather.innerHTML = saveWeather;
+
+  var saveName = localStorage.getItem(latestKey);
+  var lastName = document.getElementById("park-name");
+  lastName.innerHTML = saveName;
+
+  var savePrice = localStorage.getItem(priceKey);
+  var lastPrice = document.getElementById("park-fee");
+  lastPrice.innerHTML = savePrice;
+
+  var saveFee = localStorage.getItem(feeKey);
+  var lastFee = document.getElementById("park-fee-info");
+  lastFee.innerHTML = saveFee;
+
+};
+
+// 
+
+// Event listener on main button
 
 var findParkBtn = document.querySelector("#startFindLocalPark");
-findParkBtn.addEventListener("click", function(){
-  document.querySelector(".show").style.display = "block"
+findParkBtn.addEventListener("click", function () {
+  document.querySelector(".show").style.display = "block";
 });
+
+// 
+
+
+// Displaying every info category
 
 function statePark(Statedata) {
   var emptyStates = [];
@@ -11,66 +50,82 @@ function statePark(Statedata) {
   console.log(Statedata);
 
   for (var i = 0; i < Statedata.data.length; i++) {
-    console.log(Statedata.data);
     var nameNames = Statedata.data[i].fullName;
-    console.log(nameNames);
     emptyStates.push(nameNames);
-    console.log(emptyStates);
   }
   emptyStates.forEach(function (a, index) {
     var listParks = document.createElement("li");
     listParks.textContent = a;
     listParks.setAttribute("data-idx", index);
-    console.log(listParks);
-    console.log("data-idx", index);
     var seeNames = document.getElementById("park-list");
     seeNames.append(listParks);
-    console.log(seeNames);
 
     listParks.addEventListener("click", function (e) {
       var index = e.target.getAttribute("data-idx");
       console.log(index);
       var parkInfo = Statedata.data[index].description;
       var seeInfo = document.getElementById("park-info");
-      seeInfo.textContent="";
+      seeInfo.textContent = "";
       seeInfo.append(parkInfo);
 
       var seeWeather = Statedata.data[index].weatherInfo;
       var postWeather = document.getElementById("park-weather-info");
-      postWeather.textContent="";
+      postWeather.textContent = "";
       postWeather.append(seeWeather);
-
 
       var seeParkName = Statedata.data[index].name;
       var postParkName = document.getElementById("park-name");
-      postParkName.textContent="";
+      postParkName.textContent = "";
       postParkName.append(seeParkName);
 
       var seeParkFee = Statedata.data[index].entranceFees[0].cost;
       var postParkFee = document.getElementById("park-fee");
-      postParkFee.textContent="";
+      postParkFee.textContent = "";
       postParkFee.append(seeParkFee);
 
       var seeParkFeeInfo = Statedata.data[index].entranceFees[0].description;
       var postParkFeeInfo = document.getElementById("park-fee-info");
       postParkFeeInfo.textContent = "";
       postParkFeeInfo.append(seeParkFeeInfo);
-      
 
       var seeImg = Statedata.data[index].images[0].url;
       var postImg = (document.getElementById("park-image").src = seeImg);
-      document.getElementById("park-activities").textContent = "";
+
+      // Setting Local Storage
+
+      localStorage.setItem(index, parkInfo);
+      var lock = index;
+      localStorage.setItem("lastKey", lock);
+
+      localStorage.setItem(lastKey, seeWeather);
+      localStorage.setItem("savedKey", lastKey);
+     
+
+      localStorage.setItem(savedKey, seeParkName);
+      localStorage.setItem("latestKey", savedKey);
+
+      localStorage.setItem(latestKey, seeParkFee);
+      localStorage.setItem("priceKey", latestKey);
+
+      localStorage.setItem(priceKey, seeParkFeeInfo);
+      localStorage.setItem("feeKey", priceKey);
+
+      //
 
       var activitiesArray = [];
       var sdidx = Statedata.data[index];
-      var totalActivities = Statedata.data[index].activities &&  Statedata.data[index].activities ; 
-      var numberActivities = sdidx.activities && sdidx.activities.length < 20 ? sdidx.activities.length : 20;
-      
+      var totalActivities =
+        Statedata.data[index].activities && Statedata.data[index].activities;
+      var numberActivities =
+        sdidx.activities && sdidx.activities.length < 20
+          ? sdidx.activities.length
+          : 20;
+
       for (var i = 0; i < numberActivities; i++) {
         var parkActivities = Statedata.data[index].activities[i].name;
         activitiesArray.push(parkActivities);
       }
-  
+
       activitiesArray.forEach(function (x) {
         var list = document.createElement("li");
         list.textContent = x;
@@ -78,10 +133,18 @@ function statePark(Statedata) {
         parks.append(list);
       });
     });
+
+    
   });
   return;
 }
 
+// 
+
+
+
+
+// Nested fetch calls to get user's State
 requestOptions = {
   method: "GET",
   redirect: "follow",
@@ -91,13 +154,10 @@ fetch("https://ipapi.co/json/", requestOptions)
   .then((response) => response.text())
   .then((dataStr) => {
     let data = JSON.parse(dataStr);
-    console.log(data.region_code);
     fetch("https://ipapi.co/json/", requestOptions)
       .then((response) => response.json())
       .then((IPdata) => {
-        console.log(IPdata.region_code);
         var yourST = IPdata.region_code;
-        console.log(yourST + "hello");
 
         return fetch(
           "https://developer.nps.gov/api/v1/parks?stateCode=" +
@@ -114,10 +174,9 @@ fetch("https://ipapi.co/json/", requestOptions)
         if (Statedata) {
           statePark(Statedata);
         }
-    
+
         return;
       });
   });
 
-// LocalStorage function
-// Click event on "Random Park" button, outputs from name array[i] and saves to local storage (Set localStorage). When page loads (get localStorage) and display last result from pushing "Random Park". If button is pushed again recognize two items in localStorage and only save 1 so not too much info is displayed. Maybe write a message to user before button is clicked? "Discover other parks in the US!"?
+  // 
